@@ -40,3 +40,12 @@ You can find this config in `package.json` in root folder
 
 ## Development
 After the struggle configuring this package. Now you can start developing, there is no difference between developing React with or without Webpack.
+
+```bash
+npm start
+```
+
+## Production Build
+```bash
+npm run build
+```
