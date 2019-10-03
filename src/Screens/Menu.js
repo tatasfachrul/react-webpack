@@ -17,7 +17,7 @@ function Menu() {
   return(
     <div>
       <div>
-        This is Menu!
+        This is Menu! 2
         <ProductList menu={data} />
       </div>
     </div>
