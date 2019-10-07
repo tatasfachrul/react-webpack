@@ -1,27 +1,45 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Component } from 'react'
 import axios from 'axios'
+
+import { connect } from 'react-redux'
+import { getMenu } from '../Public/Redux/Actions/Menu'
+
 import ProductList from '../Components/ListProducts'
 
-function Menu() {
-  const [data, setData] = useState([])
+class Menu extends Component {
+  constructor(props){
+    super(props)
+    this.state ={
+      data: []
+    }
+  }
 
-  useEffect(() => {
-    fetchData()
-  }, [])
+  componentDidMount(){
+    this.fetchData()
+  }
 
-  async function fetchData () {
-    const result =  await axios.get('http://localhost:3020/menu')
-    setData(result.data.data)
+  async fetchData () {
+    await this.props.dispatch(getMenu())
+    console.log(this.props.data.menuList)
+    this.setState({data: this.props.data.menuList})
     } 
 
+render(){
   return(
     <div>
       <div>
         This is Menu! 2
-        <ProductList menu={data} />
+        <ProductList menu={this.state.data} />
       </div>
     </div>
   )
+  }
 }
 
-export default Menu
+const mapStateToProps = state => {
+  return {
+    data: state.menuList
+  }
+}
+
+export default connect (mapStateToProps)(Menu)
